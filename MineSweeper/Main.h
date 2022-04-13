@@ -5,7 +5,7 @@ class Main :public wxFrame
 public:
 	Main();
 	~Main();
-
+	
 	wxButton* button0 = nullptr;
 	wxButton* button1 = nullptr;
 	wxButton* button2 = nullptr;
@@ -28,9 +28,16 @@ public:
 	wxButton* buttonHex = nullptr;
 	wxTextCtrl* text = nullptr;
 	wxStaticText* header = nullptr;
-	bool buttonClick1 = true;
+	wxString* strng = nullptr;
 
-	void OnButtonClick(wxCommandEvent& evt);
+	int splitLeft;
+	int splitRight;
+	bool firstClick = true;
+
+	void NumButtonClick(wxCommandEvent& evt);
+	void OpperationButtonClick(wxCommandEvent& evt);
+	void EqualsButtonClick(wxCommandEvent& evt);
+	int numStore;
 	
 	wxDECLARE_EVENT_TABLE();
 

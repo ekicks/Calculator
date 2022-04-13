@@ -1,6 +1,7 @@
 #include "Main.h"
 wxBEGIN_EVENT_TABLE(Main, wxFrame)
-
+   EVT_BUTTON(wxID_ANY,NumButtonClick)
+   EVT_BUTTON(wxID_ANY,OpperationButtonClick)
 wxEND_EVENT_TABLE()
 
 Main::Main() : wxFrame(nullptr, wxID_ANY, "Main", wxPoint(40, 40), wxSize(408, 580)) {
@@ -26,16 +27,97 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Main", wxPoint(40, 40), wxSize(408, 5
 	buttonBinary = new wxButton(this, 118, "BINARY", wxPoint(191,120), wxSize(200, 60));
 	buttonHex = new wxButton(this, 119, "HEX", wxPoint(1,120), wxSize(190, 60));
 	text = new wxTextCtrl(this, wxID_ANY, "0", wxPoint(1, 180), wxSize(270, 120),wxALIGN_RIGHT);
-	header = new wxStaticText(this, wxID_ANY, "CALCULATOR", wxPoint(1, 1), wxSize(408, 120),wxALIGN_CENTER);
-
-	//SetBackgroundColour(wxColor(153, 204, 255));
+	header = new wxStaticText(this, wxID_ANY, "\nCALCULATOR", wxPoint(1, 1), wxSize(390, 120),wxALIGN_CENTER);
+	wxFont font(36, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRABOLD, false);
+	text->SetFont(font);
+	header->SetFont(font);
+	header->SetBackgroundColour(wxColor(255, 153, 255));
 	
 }
 Main::~Main() {
 	delete[]button0;
+	delete[]button1;
+	delete[]button2;
+	delete[]button3;
+	delete[]button4;
+	delete[]button5;
+	delete[]button6;
+	delete[]button7;
+	delete[]button8;
+	delete[]button9;
 	delete[]text;
+	delete[]header;
 }
-void Main::OnButtonClick(wxCommandEvent& evt) {
-	
+void Main::NumButtonClick(wxCommandEvent& evt) {
+	if (firstClick == true) {
+		text->SetLabelText("");
+		firstClick = false;
+	}
+	if (evt.GetId() == 100) {
+		text->AppendText("0");
+		numStore = 0;
+	}
+	else if (evt.GetId() == 101) {
+		text->AppendText("1");
+		numStore = 1;
+	}
+	else if (evt.GetId() == 102) {
+		text->AppendText("2");
+		numStore = 2;
+	}
+	else if (evt.GetId() == 103) {
+		text->AppendText("3");
+		numStore = 3;
+	}
+	else if (evt.GetId() == 104) {
+		text->AppendText("4");
+		numStore = 4;
+	}
+	else if (evt.GetId() == 105) {
+		text->AppendText("5");
+		numStore = 5;
+	}
+	else if (evt.GetId() == 106) {
+		text->AppendText("6");
+		numStore = 6;
+	}
+	else if (evt.GetId() == 107) {
+		text->AppendText("7");
+		numStore = 7;
+	}
+	else if (evt.GetId() == 108) {
+		text->AppendText("8");
+		numStore = 8;
+	}
+	else if (evt.GetId() == 109) {
+		text->AppendText("9");
+		numStore = 9;
+	}
+	evt.Skip();
+}
+void Main::OpperationButtonClick(wxCommandEvent& evt) {
+	if (evt.GetId() == 111) {
+		text->AppendText(".");
+	}
+	else if (evt.GetId() == 112) {
+		text->Clear();
+		text->SetValue("0");
+		firstClick = true;
+	}
+	else if (evt.GetId() == 113) {
+		text->AppendText("+");
+	}
+	else if (evt.GetId() == 114) {
+		text->AppendText("-");
+	}
+	else if (evt.GetId() == 115) {
+		text->AppendText("*");
+	}
+	else if (evt.GetId() == 116) {
+		text->AppendText("÷");
+	}
+	else if (evt.GetId() == 117) {
+		text->AppendText("%");
+	}
 	evt.Skip();
 }
