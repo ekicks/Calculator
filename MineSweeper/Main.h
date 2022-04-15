@@ -1,11 +1,10 @@
 #pragma once
-#include "wx/wx.h"
+#include "ButtonFactory.h"
 class Main :public wxFrame
 {
 public:
 	Main();
 	~Main();
-	
 	wxButton* button0 = nullptr;
 	wxButton* button1 = nullptr;
 	wxButton* button2 = nullptr;
@@ -26,9 +25,12 @@ public:
 	wxButton* buttonMod = nullptr;
 	wxButton* buttonBinary = nullptr;
 	wxButton* buttonHex = nullptr;
+	wxButton* buttonDeci = nullptr;
 	wxTextCtrl* text = nullptr;
 	wxStaticText* header = nullptr;
-	wxString* strng = nullptr;
+	wxString stringAppend = "";
+	wxString stringLeft = "";
+	wxString stringRight = "";
 
 	int splitLeft;
 	int splitRight;
