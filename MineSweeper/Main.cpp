@@ -143,52 +143,35 @@ void Main::OpperationButtonClick(wxCommandEvent& evt) {
 }
 void Main::EqualsButtonClick(wxCommandEvent& evt) {
 	if (evt.GetId() == 110) {
-		stringLeft = stringAppend;
-		stringRight = stringAppend;
 		if (stringAppend.find("+") != -1) {
-			stringLeft = stringLeft.SubString(0, stringLeft.find("+")-1);
-			stringRight = stringRight.SubString(stringRight.find("+")+1, stringRight.Length());
-			splitLeft = wxAtoi(stringLeft);
-			splitRight = wxAtoi(stringRight);
-			text->SetLabelText(std::to_string(splitLeft + splitRight));
+			int num = cProcess->AddFunction(stringAppend.ToStdString());
+			text->SetLabelText(std::to_string(num));
 			stringAppend.clear();
-			stringAppend.Append(std::to_string(splitLeft + splitRight));
-		}
-		else if (stringAppend.find("*") != -1) {
-			stringLeft = stringLeft.SubString(0, stringLeft.find("*") - 1);
-			stringRight = stringRight.SubString(stringRight.find("*") + 1, stringRight.Length());
-			splitLeft = wxAtoi(stringLeft);
-			splitRight = wxAtoi(stringRight);
-			text->SetLabelText(std::to_string(splitLeft * splitRight));
-			stringAppend.clear();
-			stringAppend.Append(std::to_string(splitLeft * splitRight));
-		}
-		else if (stringAppend.find("÷") != -1) {
-			stringLeft = stringLeft.SubString(0, stringLeft.find("÷") - 1);
-			stringRight = stringRight.SubString(stringRight.find("÷") + 1, stringRight.Length());
-			splitLeft = wxAtoi(stringLeft);
-			splitRight = wxAtoi(stringRight);
-			text->SetLabelText(std::to_string(splitLeft / splitRight));
-			stringAppend.clear();
-			stringAppend.Append(std::to_string(splitLeft / splitRight));
+			stringAppend.Append(std::to_string(num));
 		}
 		else if (stringAppend.find("-") != -1) {
-			stringLeft = stringLeft.SubString(0, stringLeft.find("-") - 1);
-			stringRight = stringRight.SubString(stringRight.find("-") + 1, stringRight.Length());
-			splitLeft = wxAtoi(stringLeft);
-			splitRight = wxAtoi(stringRight);
-			text->SetLabelText(std::to_string(splitLeft - splitRight));
+			int num = cProcess->SubtractFunction(stringAppend.ToStdString());
+			text->SetLabelText(std::to_string(num));
 			stringAppend.clear();
-			stringAppend.Append(std::to_string(splitLeft - splitRight));
+			stringAppend.Append(std::to_string(num));
+		}
+		else if (stringAppend.find("*") != -1) {
+			int num = cProcess->MultiplyFunction(stringAppend.ToStdString());
+			text->SetLabelText(std::to_string(num));
+			stringAppend.clear();
+			stringAppend.Append(std::to_string(num));
+		}
+		else if(stringAppend.find("÷") != -1) {
+			int num = cProcess->DivideFunction(stringAppend.ToStdString());
+			text->SetLabelText(std::to_string(num));
+			stringAppend.clear();
+			stringAppend.Append(std::to_string(num));
 		}
 		else if (stringAppend.find("%") != -1) {
-			stringLeft = stringLeft.SubString(0, stringLeft.find("%") - 1);
-			stringRight = stringRight.SubString(stringRight.find("%") + 1, stringRight.Length());
-			splitLeft = wxAtoi(stringLeft);
-			splitRight = wxAtoi(stringRight);
-			text->SetLabelText(std::to_string(splitLeft % splitRight));
+			int num = cProcess->ModFunction(stringAppend.ToStdString());
+			text->SetLabelText(std::to_string(num));
 			stringAppend.clear();
-			stringAppend.Append(std::to_string(splitLeft % splitRight));
+			stringAppend.Append(std::to_string(num));
 		}
 	}
 }

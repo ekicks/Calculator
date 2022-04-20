@@ -1,7 +1,11 @@
 #pragma once
 #include "ButtonFactory.h"
+
+#include "CalculatorProcessor.h"
 class Main :public wxFrame
 {
+private:
+	CalculatorProcessor* cProcess = &CalculatorProcessor::getInstance();
 public:
 	Main();
 	~Main();
@@ -31,6 +35,7 @@ public:
 	wxString stringAppend = "";
 	wxString stringLeft = "";
 	wxString stringRight = "";
+
 
 	int splitLeft;
 	int splitRight;
