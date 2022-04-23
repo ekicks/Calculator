@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <list>
+#include "IBaseCommands.h"
 class CalculatorProcessor
 {
 public:
@@ -9,14 +11,18 @@ public:
 	}
 private:
 	CalculatorProcessor() {}
-
+	std::list<IBaseCommands*> commands;
+	IBaseCommands* lastAdded = nullptr;
 public:
 	int left;
-	int right ;
+	int right;
 
 	std::string textString;
 	std::string SplitLeft(const std::string& getSplit, char symbol);
 	std::string SplitRight(const std::string& getSplit, char symbol);
+
+	void AddCommand(IBaseCommands* commands, int num);
+	int CommandExecution();
 
 	int AddFunction(const std::string& string);
 	int SubtractFunction(const std::string& string);

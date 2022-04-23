@@ -35,6 +35,9 @@ public:
 	wxString stringAppend = "";
 	wxString stringLeft = "";
 	wxString stringRight = "";
+	wxString numberString = "";
+
+	const char* mLabelsCode = "0123456789";
 
 
 	int splitLeft;

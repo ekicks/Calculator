@@ -1,5 +1,31 @@
 #include "CalculatorProcessor.h"
 
+void CalculatorProcessor::AddCommand(IBaseCommands* command, int num) {
+	if (lastAdded != nullptr) {
+		lastAdded->currentVal = num;
+	}
+	commands.push_back(command);
+	lastAdded = command;
+}
+int CalculatorProcessor::CommandExecution() {
+
+	int tempNum;
+	for (std::list<IBaseCommands*>::iterator it = commands.begin(); it != commands.end();) {
+		lastAdded = (*it);
+		lastAdded->Execute();
+		tempNum = lastAdded->nextVal;
+		it++;
+
+		if (it != commands.end()) {
+			(*it)->nextVal = tempNum;
+		}
+		else {
+			commands.clear();
+			lastAdded = nullptr;
+		}
+	}
+	return tempNum;
+}
  std::string CalculatorProcessor::SplitLeft(const std::string& getSplit, char symbol)
 { 
 	std::string gs = getSplit.substr(0, getSplit.find(symbol));

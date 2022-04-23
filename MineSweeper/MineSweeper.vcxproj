@@ -145,6 +145,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="ButtonFactory.h" />
     <ClInclude Include="CalculatorProcessor.h" />
+    <ClInclude Include="IBaseCommands.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="ButtonFactory.cpp" />
     <ClCompile Include="CalculatorProcessor.cpp" />
+    <ClCompile Include="IBaseCommands.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>

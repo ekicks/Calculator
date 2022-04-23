@@ -56,6 +56,9 @@ void Main::NumButtonClick(wxCommandEvent& evt) {
 		text->SetLabelText("");
 		firstClick = false;
 	}
+	if (evt.GetId() >= 100 && evt.GetId() < 110) {
+		numberString.Append(mLabelsCode[evt.GetId()%100]);
+	}
 	if (evt.GetId() == 100) {
 		text->AppendText("0");
 		stringAppend.append("0");
@@ -122,18 +125,34 @@ void Main::OpperationButtonClick(wxCommandEvent& evt) {
 	else if (evt.GetId() == 113) {
 		text->AppendText("+");
 		stringAppend.append("+");
+		AddCommand* ac = new AddCommand();
+		ac->nextVal = wxAtoi(numberString);
+		numberString.clear();
+		cProcess->AddCommand(ac, ac->nextVal);
 	}
 	else if (evt.GetId() == 114) {
 		text->AppendText("-");
 		stringAppend.append("-");
+		SubtractCommand* sc = new SubtractCommand();
+		sc->nextVal = wxAtoi(numberString);
+		numberString.clear();
+		cProcess->AddCommand(sc, sc->nextVal);
 	}
 	else if (evt.GetId() == 115) {
 		text->AppendText("*");
 		stringAppend.append("*");
+		MultiplyCommand* mc = new MultiplyCommand();
+		mc->nextVal = wxAtoi(numberString);
+		numberString.clear();
+		cProcess->AddCommand(mc, mc->nextVal);
 	}
 	else if (evt.GetId() == 116) {
 		text->AppendText("÷");
 		stringAppend.append("÷");
+		DivideCommand* dc = new DivideCommand();
+		dc->nextVal = wxAtoi(numberString);
+		numberString.clear();
+		cProcess->AddCommand(dc, dc->nextVal);
 	}
 	else if (evt.GetId() == 117) {
 		text->AppendText("%");
@@ -143,11 +162,19 @@ void Main::OpperationButtonClick(wxCommandEvent& evt) {
 }
 void Main::EqualsButtonClick(wxCommandEvent& evt) {
 	if (evt.GetId() == 110) {
-		if (stringAppend.find("+") != -1) {
+		cProcess->AddCommand(new EqualsCommand(), wxAtoi(numberString));
+		numberString.clear();
+		numberString = std::to_string(cProcess->CommandExecution());
+		text->SetLabelText(numberString);
+		
+		
+
+		/*if (stringAppend.find("+") != -1) {
 			int num = cProcess->AddFunction(stringAppend.ToStdString());
 			text->SetLabelText(std::to_string(num));
 			stringAppend.clear();
 			stringAppend.Append(std::to_string(num));
+			
 		}
 		else if (stringAppend.find("-") != -1) {
 			int num = cProcess->SubtractFunction(stringAppend.ToStdString());
@@ -172,6 +199,6 @@ void Main::EqualsButtonClick(wxCommandEvent& evt) {
 			text->SetLabelText(std::to_string(num));
 			stringAppend.clear();
 			stringAppend.Append(std::to_string(num));
-		}
+		}*/
 	}
 }
