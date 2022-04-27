@@ -3,8 +3,8 @@
 class IBaseCommands
 {
 public:
-	int nextVal = 0;
-	int currentVal = 0;
+	float nextVal = 0;
+	float currentVal = 0;
 	virtual void Execute() = 0;
 };
 
@@ -44,7 +44,7 @@ class ModCommand : public IBaseCommands
 {
 public:
 	void Execute() {
-		nextVal %= currentVal;
+		nextVal = (int)nextVal % (int)currentVal;
 	}
 };
 class EqualsCommand : public IBaseCommands

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MineSweeper", "MineSweeper\MineSweeper.vcxproj", "{A879312D-F390-480B-9A48-5B35AE92F293}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Calculator", "MineSweeper\MineSweeper.vcxproj", "{A879312D-F390-480B-9A48-5B35AE92F293}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CalculatorTests", "CalculatorTests\CalculatorTests.vcxproj", "{55989377-C8BD-4CA0-89E5-4A915FCC20E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{A879312D-F390-480B-9A48-5B35AE92F293}.Release|x64.Build.0 = Release|x64
 		{A879312D-F390-480B-9A48-5B35AE92F293}.Release|x86.ActiveCfg = Release|Win32
 		{A879312D-F390-480B-9A48-5B35AE92F293}.Release|x86.Build.0 = Release|Win32
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Debug|x64.ActiveCfg = Debug|x64
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Debug|x64.Build.0 = Debug|x64
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Debug|x86.ActiveCfg = Debug|Win32
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Debug|x86.Build.0 = Debug|Win32
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Release|x64.ActiveCfg = Release|x64
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Release|x64.Build.0 = Release|x64
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Release|x86.ActiveCfg = Release|Win32
+		{55989377-C8BD-4CA0-89E5-4A915FCC20E2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

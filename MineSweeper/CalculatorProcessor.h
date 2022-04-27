@@ -2,6 +2,8 @@
 #include <string>
 #include <list>
 #include "IBaseCommands.h"
+#include <sstream>
+
 class CalculatorProcessor
 {
 public:
@@ -22,12 +24,14 @@ public:
 	std::string SplitRight(const std::string& getSplit, char symbol);
 
 	void AddCommand(IBaseCommands* commands, int num);
-	int CommandExecution();
+	float CommandExecution();
 
-	int AddFunction(const std::string& string);
-	int SubtractFunction(const std::string& string);
-	int DivideFunction(const std::string& string);
-	int MultiplyFunction(const std::string& string);
+	float AddFunction(const std::string& string);
+	float SubtractFunction(const std::string& string);
+	float DivideFunction(const std::string& string);
+	float MultiplyFunction(const std::string& string);
 	int ModFunction(const std::string& string);
+	std::string BinaryFunction(long long bin);
+	std::string HexFunction(int number);
 };
 

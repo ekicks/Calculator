@@ -4,6 +4,9 @@ wxBEGIN_EVENT_TABLE(Main, wxFrame)
    EVT_BUTTON(wxID_ANY,NumButtonClick)
    EVT_BUTTON(wxID_ANY,OpperationButtonClick)
 	EVT_BUTTON(110,EqualsButtonClick)
+	EVT_BUTTON(118,BinaryButtonClick)
+	EVT_BUTTON(119,HexButtonClick)
+	EVT_BUTTON(111,NegativeButtonClick)
 wxEND_EVENT_TABLE()
 
 Main::Main() : wxFrame(nullptr, wxID_ANY, "Main", wxPoint(40, 40), wxSize(408, 580)) {
@@ -19,7 +22,7 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Main", wxPoint(40, 40), wxSize(408, 5
 	button8 = ButtonFactory::CreateNumberButton(this, 108, "8", wxPoint(181,420), wxSize(90, 60));
 	button9 = ButtonFactory::CreateNumberButton(this, 109, "9", wxPoint(91,480), wxSize(90, 60));
 	buttonEquals = ButtonFactory::CreateEqualsButton(this, 110, wxPoint(181,480), wxSize(90, 60));
-	buttonDot = ButtonFactory::CreateDotButton(this, 111, wxPoint(1,480), wxSize(90, 60));
+	buttonDot = ButtonFactory::CreateNegativeButton(this, 111, wxPoint(1,480), wxSize(90, 60));
 	buttonClear = ButtonFactory::CreateClearButton(this, 112, wxPoint(271,480), wxSize(120, 60));
 	buttonAdd = ButtonFactory::CreateAddButton(this, 113, wxPoint(271,420), wxSize(120, 60));
 	buttonSubtract = ButtonFactory::CreateMinusButton(this, 114, wxPoint(271,360), wxSize(120, 60));
@@ -28,10 +31,10 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Main", wxPoint(40, 40), wxSize(408, 5
 	buttonMod = ButtonFactory::CreateModuleButton(this, 117, wxPoint(271,180), wxSize(120, 60));
 	buttonBinary = ButtonFactory::CreateBinaryButton(this, 118, wxPoint(261,120), wxSize(130, 60));
 	buttonHex = ButtonFactory::CreatehexButton(this, 119, wxPoint(1, 120), wxSize(130, 60));
-	buttonDeci = ButtonFactory::CreateDeciButton(this, 119,  wxPoint(131, 120), wxSize(130, 60));
+	buttonDeci = ButtonFactory::CreateDeciButton(this, 120,  wxPoint(131, 120), wxSize(130, 60));
 	text = new wxTextCtrl(this, wxID_ANY, "0", wxPoint(1, 180), wxSize(270, 120),wxALIGN_RIGHT);
 	header = new wxStaticText(this, wxID_ANY, "\nCALCULATOR", wxPoint(1, 1), wxSize(390, 120),wxALIGN_CENTER);
-	wxFont font(36, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRABOLD, false);
+	wxFont font(24, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_EXTRABOLD, false);
 	text->SetFont(font);
 	header->SetFont(font);
 	header->SetBackgroundColour(wxColor(255, 153, 255));
@@ -113,20 +116,47 @@ void Main::NumButtonClick(wxCommandEvent& evt) {
 }
 void Main::OpperationButtonClick(wxCommandEvent& evt) {
 	if (evt.GetId() == 111) {
-		text->AppendText(".");
-		stringAppend.append(".");
+		//only append if there is an operator or no number
+		if (stringAppend.IsEmpty()) {
+			text->AppendText("~");
+			stringAppend.append("~");
+			numberString = "-" + numberString;
+		}
+		else if (stringAppend == numberString) {
+			stringAppend.clear();
+			stringAppend.append('~' + numberString);
+			text->SetLabelText(stringAppend);
+			numberString = "-" + numberString;
+		}
+		else {
+			std::string string1 = "";
+			std::string string2 = "";
+			for (size_t i = stringAppend.size() - 1; i > 0; i--)
+			{
+				if (stringAppend[i] == '+' || stringAppend[i] == '-' || stringAppend[i] == '*' || stringAppend[i] == '÷' || stringAppend[i] == '%') {
+					string1.append(stringAppend.SubString(0, i));
+					string2.append(stringAppend.SubString(i + 1, stringAppend.size()));
+					stringAppend.clear();
+					stringAppend.append(string1 + "(~" + string2 + ')');
+					text->SetLabelText(stringAppend);
+					numberString = "-" + numberString;
+					break;
+				}
+			}
+		}
 	}
 	else if (evt.GetId() == 112) {
 		text->Clear();
 		stringAppend.clear();
 		text->SetValue("0");
+		numberString.clear();
 		firstClick = true;
 	}
 	else if (evt.GetId() == 113) {
 		text->AppendText("+");
 		stringAppend.append("+");
 		AddCommand* ac = new AddCommand();
-		ac->nextVal = wxAtoi(numberString);
+		ac->nextVal = wxAtof(numberString);
 		numberString.clear();
 		cProcess->AddCommand(ac, ac->nextVal);
 	}
@@ -134,7 +164,7 @@ void Main::OpperationButtonClick(wxCommandEvent& evt) {
 		text->AppendText("-");
 		stringAppend.append("-");
 		SubtractCommand* sc = new SubtractCommand();
-		sc->nextVal = wxAtoi(numberString);
+		sc->nextVal = wxAtof(numberString);
 		numberString.clear();
 		cProcess->AddCommand(sc, sc->nextVal);
 	}
@@ -142,7 +172,7 @@ void Main::OpperationButtonClick(wxCommandEvent& evt) {
 		text->AppendText("*");
 		stringAppend.append("*");
 		MultiplyCommand* mc = new MultiplyCommand();
-		mc->nextVal = wxAtoi(numberString);
+		mc->nextVal = wxAtof(numberString);
 		numberString.clear();
 		cProcess->AddCommand(mc, mc->nextVal);
 	}
@@ -150,55 +180,41 @@ void Main::OpperationButtonClick(wxCommandEvent& evt) {
 		text->AppendText("÷");
 		stringAppend.append("÷");
 		DivideCommand* dc = new DivideCommand();
-		dc->nextVal = wxAtoi(numberString);
+		dc->nextVal = wxAtof(numberString);
 		numberString.clear();
 		cProcess->AddCommand(dc, dc->nextVal);
 	}
 	else if (evt.GetId() == 117) {
 		text->AppendText("%");
 		stringAppend.append("%");
+		ModCommand* mc = new ModCommand();
+		mc->nextVal = wxAtof(numberString);
+		numberString.clear();
+		cProcess->AddCommand(mc, mc->nextVal);
+	}
+	else if (evt.GetId() == 120) {
+		text->AppendText(".");
+		stringAppend.append(".");
+		numberString.append(".");
 	}
 	evt.Skip();
 }
 void Main::EqualsButtonClick(wxCommandEvent& evt) {
 	if (evt.GetId() == 110) {
-		cProcess->AddCommand(new EqualsCommand(), wxAtoi(numberString));
+		cProcess->AddCommand(new EqualsCommand(), wxAtof(numberString));
 		numberString.clear();
 		numberString = std::to_string(cProcess->CommandExecution());
 		text->SetLabelText(numberString);
-		
-		
+	}
+}
+void Main::BinaryButtonClick(wxCommandEvent& evt) {
+	text->SetLabelText(cProcess->BinaryFunction(wxAtol(numberString)));
+}
+void Main::HexButtonClick(wxCommandEvent& evt) {
+	text->SetLabelText(cProcess->HexFunction(wxAtoi(numberString)));
+}
+void Main::NegativeButtonClick(wxCommandEvent& evt) {
+	if (stringAppend.Find("~") == true) {
 
-		/*if (stringAppend.find("+") != -1) {
-			int num = cProcess->AddFunction(stringAppend.ToStdString());
-			text->SetLabelText(std::to_string(num));
-			stringAppend.clear();
-			stringAppend.Append(std::to_string(num));
-			
-		}
-		else if (stringAppend.find("-") != -1) {
-			int num = cProcess->SubtractFunction(stringAppend.ToStdString());
-			text->SetLabelText(std::to_string(num));
-			stringAppend.clear();
-			stringAppend.Append(std::to_string(num));
-		}
-		else if (stringAppend.find("*") != -1) {
-			int num = cProcess->MultiplyFunction(stringAppend.ToStdString());
-			text->SetLabelText(std::to_string(num));
-			stringAppend.clear();
-			stringAppend.Append(std::to_string(num));
-		}
-		else if(stringAppend.find("÷") != -1) {
-			int num = cProcess->DivideFunction(stringAppend.ToStdString());
-			text->SetLabelText(std::to_string(num));
-			stringAppend.clear();
-			stringAppend.Append(std::to_string(num));
-		}
-		else if (stringAppend.find("%") != -1) {
-			int num = cProcess->ModFunction(stringAppend.ToStdString());
-			text->SetLabelText(std::to_string(num));
-			stringAppend.clear();
-			stringAppend.Append(std::to_string(num));
-		}*/
 	}
 }

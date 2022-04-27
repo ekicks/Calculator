@@ -40,14 +40,15 @@ public:
 	const char* mLabelsCode = "0123456789";
 
 
-	int splitLeft;
-	int splitRight;
 	bool firstClick = true;
 
 	void NumButtonClick(wxCommandEvent& evt);
 	void OpperationButtonClick(wxCommandEvent& evt);
 	void EqualsButtonClick(wxCommandEvent& evt);
-	int numStore;
+	void BinaryButtonClick(wxCommandEvent& evt);
+	void HexButtonClick(wxCommandEvent& evt);
+	void NegativeButtonClick(wxCommandEvent& evt);
+	float numStore;
 	
 	wxDECLARE_EVENT_TABLE();
 

@@ -35,9 +35,9 @@ wxButton* ButtonFactory::CreateEqualsButton(wxWindow* parent, wxWindowID id, con
 	return new wxButton(parent, id, "=", pos, size);
 }
 
-wxButton* ButtonFactory::CreateDotButton(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
+wxButton* ButtonFactory::CreateNegativeButton(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
 {
-	return new wxButton(parent, id, ".", pos, size);
+	return new wxButton(parent, id, "~", pos, size);
 }
 
 wxButton* ButtonFactory::CreateClearButton(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)

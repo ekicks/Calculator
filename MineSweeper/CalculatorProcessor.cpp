@@ -7,9 +7,9 @@ void CalculatorProcessor::AddCommand(IBaseCommands* command, int num) {
 	commands.push_back(command);
 	lastAdded = command;
 }
-int CalculatorProcessor::CommandExecution() {
+float CalculatorProcessor::CommandExecution() {
 
-	int tempNum;
+	float tempNum;
 	for (std::list<IBaseCommands*>::iterator it = commands.begin(); it != commands.end();) {
 		lastAdded = (*it);
 		lastAdded->Execute();
@@ -38,35 +38,35 @@ int CalculatorProcessor::CommandExecution() {
 	return gs;
 }
 
-int CalculatorProcessor::AddFunction(const std::string& string)
+float CalculatorProcessor::AddFunction(const std::string& string)
 {
 	char addSymbol = '+';
-	left = std::atoi(SplitLeft(string, addSymbol).c_str());
-	right = std::atoi(SplitRight(string, addSymbol).c_str());
+	left = std::atof(SplitLeft(string, addSymbol).c_str());
+	right = std::atof(SplitRight(string, addSymbol).c_str());
 	return left + right;
 }
 
-int CalculatorProcessor::SubtractFunction(const std::string& string)
+float CalculatorProcessor::SubtractFunction(const std::string& string)
 {
 	char minusSymbol = '-';
-	left = std::atoi(SplitLeft(string, minusSymbol).c_str());
-	right = std::atoi(SplitRight(string, minusSymbol).c_str());
+	left = std::atof(SplitLeft(string, minusSymbol).c_str());
+	right = std::atof(SplitRight(string, minusSymbol).c_str());
 	return left - right;
 }
 
-int CalculatorProcessor::DivideFunction(const std::string& string)
+float CalculatorProcessor::DivideFunction(const std::string& string)
 {
 	char divideSymbol = '÷';
-	left = std::atoi(SplitLeft(string, divideSymbol).c_str());
-	right = std::atoi(SplitRight(string, divideSymbol).c_str());
+	left = std::atof(SplitLeft(string, divideSymbol).c_str());
+	right = std::atof(SplitRight(string, divideSymbol).c_str());
 	return left / right;
 }
 
-int CalculatorProcessor::MultiplyFunction(const std::string& string)
+float CalculatorProcessor::MultiplyFunction(const std::string& string)
 {
 	char multiplySymbol = '*';
-	left = std::atoi(SplitLeft(string, multiplySymbol).c_str());
-	right = std::atoi(SplitRight(string, multiplySymbol).c_str());
+	left = std::atof(SplitLeft(string, multiplySymbol).c_str());
+	right = std::atof(SplitRight(string, multiplySymbol).c_str());
 	return left * right;
 }
 
@@ -76,4 +76,33 @@ int CalculatorProcessor::ModFunction(const std::string& string)
 	left = std::atoi(SplitLeft(string, modSymbol).c_str());
 	right =std::atoi(SplitRight(string, modSymbol).c_str());
 	return left % right;
+}
+
+std::string CalculatorProcessor::BinaryFunction(long long bin) 
+{
+	std::string text = "";
+	for (int i = 0; i < 8; i++) {
+		if (bin % 2 == 0) {
+			text = "0" + text;
+		}
+		else {
+			text = "1" + text;
+		}
+		bin /= 2;
+	}
+	return text;
+}
+
+std::string CalculatorProcessor::HexFunction(int number)
+{
+	std::stringstream text;
+	if (number < 0)
+	{
+		number *= -1;
+		text << '-' << "0x" << std::hex << number;
+	}
+	else {
+		text << "0x" << std::hex << number;
+	}
+	return text.str();
 }

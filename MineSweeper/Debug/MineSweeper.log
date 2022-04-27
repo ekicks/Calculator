@@ -1,3 +1,17 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (MineSweeper.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   CalculatorProcessor.cpp
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\IBaseCommands.h(47,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(5,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(44,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(45,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(46,14): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(52,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(53,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(54,14): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(60,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(61,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(62,14): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(68,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(69,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ekick\OneDrive\Desktop\Calculator\MineSweeper\CalculatorProcessor.cpp(70,14): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
   MineSweeper.vcxproj -> C:\Users\ekick\OneDrive\Desktop\Calculator\Debug\Calculator.exe
